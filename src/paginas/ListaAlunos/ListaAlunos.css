@@ -1,0 +1,17 @@
+.turmas-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card-turma {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 250px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.card-turma h2 {
+  margin-bottom: 15px;
+}

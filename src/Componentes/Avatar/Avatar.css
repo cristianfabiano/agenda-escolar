@@ -1,0 +1,28 @@
+<<<<<<< HEAD
+.avatar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar__imagem {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+=======
+.avatar__root {
+  background-color: var(--cor-cinza);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  color: var(--cor-texto-claro);
+}
+
+.avatar__root img {
+  border-radius: 50%;
+  width: 100%;
+>>>>>>> 49b55f75a12dc0586af16e65c0fadbbd324054d2
+}

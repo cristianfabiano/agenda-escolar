@@ -1,0 +1,30 @@
+.cabecalho__root {
+<<<<<<< HEAD
+  background: #7d89d1;
+  padding: 10px 20px;
+}
+
+.cabecalho__logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cabecalho__logo img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+}
+
+.cabecalho__logo h1 {
+  color: white;
+  font-size: 28px;
+  margin: 0;
+=======
+  background-color: var(--cor-primaria-clara);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+>>>>>>> 49b55f75a12dc0586af16e65c0fadbbd324054d2
+}
