@@ -6,10 +6,10 @@ function Turmas() {
     JSON.parse(localStorage.getItem("alunos")) || [];
 
   const turmas = [
-    "Desenvolvimento web",
-    "Desenvolvimento mobile",
-    "Desenvolvimento de jogos",
-    "Desenvolvimento de sistemas",
+    "Desenvolvimento Web",
+    "Desenvolvimento Mobile",
+    "Desenvolvimento de Jogos",
+    "Desenvolvimento de Sistemas",
   ];
 
   return (
