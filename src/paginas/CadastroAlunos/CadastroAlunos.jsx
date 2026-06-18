@@ -1,11 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
-
 import BotaoCustomizado from "../../Componentes/BotaoCustomizado/BotaoCustomizado";
 import CampoCustomizado from "../../Componentes/CampoCustomizado/CampoCustomizado";
 import Principal from "../../Componentes/Principal/Principal";
-
 import validarCPF from "../../utils/validarCPF";
 
 function CadastroAlunos() {

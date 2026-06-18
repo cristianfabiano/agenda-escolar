@@ -1,23 +1,20 @@
 import "./Avatar.css";
 
-function Avatar({ nome, imagem }) {
+function Avatar({ nome = "", imagem }) {
   const primeirasLetras = nome
-    ? nome
-        .split(" ")
-        .map((item) => item[0])
-        .join("")
-        .toUpperCase()
-    : "";
+    .trim()
+    .split(" ")
+    .filter((item) => item.length > 0)
+    .map((item) => item[0])
+    .join("")
+    .toUpperCase();
 
   return (
     <div className="avatar__root">
       {imagem ? (
-        <img
-          src={imagem}
-          alt={nome}
-        />
+        <img src={imagem} alt={nome} />
       ) : (
-        primeirasLetras
+        primeirasLetras || "?"
       )}
     </div>
   );

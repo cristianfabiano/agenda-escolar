@@ -1,13 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { MdEdit, MdDelete, MdAddCircle } from "react-icons/md";
 import { useState } from "react";
-
 import Avatar from "../../Componentes/Avatar/Avatar";
 import CampoCustomizado from "../../Componentes/CampoCustomizado/CampoCustomizado";
 import Principal from "../../Componentes/Principal/Principal";
-
 import normalizarString from "../../utils/normalizarString";
-
 import "./ListaAlunos.css";
 
 function ListaAlunos() {
@@ -15,24 +12,16 @@ function ListaAlunos() {
 
   const [termoBusca, setTermoBusca] = useState("");
 
-  const alunosDoLocalStorage =
-    JSON.parse(localStorage.getItem("alunos")) || [];
+  const alunosDoLocalStorage = JSON.parse(localStorage.getItem("alunos")) || [];
 
   const removerAluno = (alunoParaRemover) => {
-    if (
-      confirm(
-        `Tem certeza que deseja remover o aluno ${alunoParaRemover.nome}?`
-      )
-    ) {
-      const alunosAtualizados =
-        alunosDoLocalStorage.filter(
-          (aluno) =>
-            aluno.id !== alunoParaRemover.id
-        );
 
-      localStorage.setItem(
-        "alunos",
-        JSON.stringify(alunosAtualizados)
+    if (
+      confirm(`Tem certeza que deseja remover o aluno ${alunoParaRemover.nome}?`)) {
+      const alunosAtualizados = alunosDoLocalStorage.filter((aluno) => aluno.id !== alunoParaRemover.id
+      );
+
+      localStorage.setItem("alunos", JSON.stringify(alunosAtualizados)
       );
 
       navigate("/lista-alunos");
@@ -42,16 +31,12 @@ function ListaAlunos() {
   const alunosFiltrados =
     alunosDoLocalStorage.filter(
       (aluno) =>
-        normalizarString(aluno.nome).includes(
-          normalizarString(termoBusca)
-        ) ||
-        normalizarString(aluno.cpf).includes(
-          normalizarString(termoBusca)
-        ) ||
-        normalizarString(aluno.matricula).includes(
-          normalizarString(termoBusca)
-        )
+        normalizarString(aluno.nome).includes(normalizarString(termoBusca)) ||
+        normalizarString(aluno.cpf).includes(normalizarString(termoBusca)) ||
+        normalizarString(aluno.matricula).includes(normalizarString(termoBusca))
     );
+
+
 
   return (
     <Principal
@@ -85,17 +70,14 @@ function ListaAlunos() {
             <MdEdit
               size={24}
               onClick={() =>
-                navigate(
-                  `/cadastro-aluno/${aluno.id}`
-                )
+                navigate( `/cadastro-aluno/${aluno.id}`)
               }
             />
 
             <MdDelete
               size={24}
               color="red"
-              onClick={() =>
-                removerAluno(aluno)
+              onClick={() => removerAluno(aluno)
               }
             />
           </div>
@@ -112,8 +94,7 @@ function ListaAlunos() {
         className="lista-alunos__botao-adicionar"
         size={64}
         color="#ff9100"
-        onClick={() =>
-          navigate("/cadastro-aluno")
+        onClick={() => navigate("/cadastro-aluno")
         }
       />
     </Principal>

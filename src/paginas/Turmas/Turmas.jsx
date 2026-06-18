@@ -1,4 +1,4 @@
-import Principal from "../../Componentes/Principal/Principal";
+import Principal from "../../componentes/Principal/Principal";
 import "./Turmas.css";
 
 function Turmas() {
@@ -13,23 +13,15 @@ function Turmas() {
   ];
 
   return (
-    <Principal
-      titulo="Turmas"
-      voltarPara="/"
-    >
+    <Principal titulo="Turmas" voltarPara="/">
       <div className="turmas-container">
         {turmas.map((turma) => {
-          const alunosDaTurma =
-            alunos.filter(
-              (aluno) =>
-                aluno.turma === turma
-            );
+          const alunosDaTurma = alunos.filter(
+            (aluno) => aluno.turma === turma
+          );
 
           return (
-            <div
-              key={turma}
-              className="card-turma"
-            >
+            <div key={turma} className="card-turma">
               <h2>{turma}</h2>
 
               {alunosDaTurma.length > 0 ? (
@@ -49,8 +41,4 @@ function Turmas() {
   );
 }
 
-import "./Turmas.css";
-function turmas (){
-    return
-}
 export default Turmas;

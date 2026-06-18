@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .avatar {
   display: flex;
   align-items: center;
@@ -10,19 +9,27 @@
   height: 70px;
   border-radius: 50%;
   object-fit: cover;
-=======
+}
+
 .avatar__root {
-  background-color: var(--cor-cinza);
   width: 32px;
   height: 32px;
   border-radius: 50%;
+  background-color: var(--cor-cinza);
+
   display: grid;
   place-content: center;
+
   color: var(--cor-texto-claro);
+  font-weight: bold;
+  font-size: 0.9rem;
+  overflow: hidden;
+  user-select: none;
 }
 
 .avatar__root img {
-  border-radius: 50%;
   width: 100%;
->>>>>>> 49b55f75a12dc0586af16e65c0fadbbd324054d2
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
