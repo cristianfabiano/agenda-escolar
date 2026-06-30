@@ -13,7 +13,7 @@ function Turmas() {
   ];
 
   return (
-    <Principal titulo="Turmas" voltarPara="/">
+    <Principal titulo="Turmas" voltarPara="/inicio">
       <div className="turmas-container">
         {turmas.map((turma) => {
           const alunosDaTurma = alunos.filter(

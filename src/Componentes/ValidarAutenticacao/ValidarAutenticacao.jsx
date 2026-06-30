@@ -8,9 +8,9 @@ function ValidarAutenticacao() {
 
   useEffect(() => {
     if (!usuarioLogado) {
-      navigate("/login");
+      navigate("/login", { replace: true });
     }
-  }, [navigate, usuarioLogado]);
+  }, [usuarioLogado, navigate]);
 
   return usuarioLogado ? <Outlet /> : null;
 }

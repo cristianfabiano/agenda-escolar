@@ -89,7 +89,7 @@ function CadastroAlunos() {
   return (
     <Principal
       titulo="Cadastro de Alunos"
-      voltarPara="/"
+      voltarPara="/inicio"
     >
       <CampoCustomizado
         label="Nome"

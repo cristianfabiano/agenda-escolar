@@ -1,4 +1,3 @@
-import Avatar from "../Avatar/Avatar";
 import "./Cabecalho.css";
 
 function Cabecalho() {
@@ -7,10 +6,8 @@ function Cabecalho() {
       <img
         src="/logo.png"
         alt="Logo"
-        height="32"
+        className="cabecalho__logo"
       />
-
-      <Avatar nome="Agenda Escolar" />
     </header>
   );
 }

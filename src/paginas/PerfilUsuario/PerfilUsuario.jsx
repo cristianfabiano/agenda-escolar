@@ -21,7 +21,7 @@ function PerfilUsuario() {
   };
 
   return (
-    <Principal titulo="Meu Perfil" voltarPara="/">
+    <Principal titulo="Meu Perfil" voltarPara="/inicio">
       {usuarioLogado && (
         <>
           <label for="imageUpload" className="perfil-usuario__avatar">

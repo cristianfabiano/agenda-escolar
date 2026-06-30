@@ -41,7 +41,7 @@ function ListaAlunos() {
   return (
     <Principal
       titulo="Lista de Alunos"
-      voltarPara="/"
+      voltarPara="/inicio"
     >
       <CampoCustomizado
         type="search"

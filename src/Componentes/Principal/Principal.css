@@ -1,12 +1,26 @@
 .principal__root {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  padding: 30px;
 }
 
 .principal__titulo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.principal__titulo svg {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.principal__titulo svg:hover {
+  transform: translateX(-4px);
+}
+
+.principal__titulo h2 {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+  color: #16213e;
 }

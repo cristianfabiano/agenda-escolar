@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../Contexto/AppContext";
-
+import BotaoCustomizado from "../../Componentes/BotaoCustomizado/BotaoCustomizado";
 import Principal from "../../Componentes/Principal/Principal";
 import "./PaginaInicial.css";
 
@@ -9,13 +9,37 @@ import { FaListUl, FaUserGraduate } from "react-icons/fa";
 
 function PaginaInicial() {
   const navigate = useNavigate();
-  const { usuarioLogado } = useAppContext();
+  const { usuarioLogado, setUsuarioLogado } = useAppContext();
+
+  function sair() {
+    localStorage.removeItem("usuarioLogado");
+    setUsuarioLogado(null);
+    navigate("/login", { replace: true });
+  }
 
   return (
     <Principal titulo="">
 
-      <h2>Bem-vindo, {usuarioLogado?.nome}!</h2>
-      <p>{usuarioLogado?.email}</p>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "30px",
+        }}
+      >
+        <div>
+          <h2>Bem-vindo, {usuarioLogado?.nome}!</h2>
+          <p>{usuarioLogado?.email}</p>
+        </div>
+
+        <BotaoCustomizado
+          tipo="secundario"
+          aoClicar={sair}
+        >
+          Sair
+        </BotaoCustomizado>
+      </div>
 
       <div className="cards-container">
 

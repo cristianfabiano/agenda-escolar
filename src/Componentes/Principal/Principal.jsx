@@ -8,7 +8,13 @@ function Principal({ voltarPara, titulo, children }) {
   return (
     <main className="principal__root">
       <div className="principal__titulo">
-        {voltarPara && <IoArrowBack size={24} onClick={() => navigate(voltarPara)} />}
+        {voltarPara && <IoArrowBack
+  size={24}
+  onClick={() => {
+    console.log("Voltar para:", voltarPara);
+    navigate(voltarPara);
+  }}
+/>}
 
         <h2>{titulo}</h2>
       </div>
