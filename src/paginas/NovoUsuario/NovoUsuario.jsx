@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import BotaoCustomizado from "../../componentes/BotaoCustomizado/BotaoCustomizado";
-import CampoCustomizado from "../../componentes/CampoCustomizado/CampoCustomizado";
-import Principal from "../../componentes/Principal/Principal";
+import BotaoCustomizado from "../../Componentes/BotaoCustomizado/BotaoCustomizado";
+import CampoCustomizado from "../../Componentes/CampoCustomizado/CampoCustomizado";
+import Principal from "../../Componentes/Principal/Principal";
 
 import validarEmail from "../../utils/validarEmail";
 import validarSenha from "../../utils/validarSenha";

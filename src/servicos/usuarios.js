@@ -1,17 +1,38 @@
-const usuariosDoLocalStorage = JSON.parse(localStorage.getItem("usuarios")) || [];
+export function buscarUsuarioLogado() {
+  const usuarioLogado = localStorage.getItem("usuarioLogado");
 
-export const buscarUsuarioLogado = () => {
-  const idUsuarioLogado = localStorage.getItem("usuarioLogado");
-
-  if (!idUsuarioLogado) {
+  if (!usuarioLogado) {
     return null;
   }
 
-  return usuariosDoLocalStorage.find((u) => u.id === idUsuarioLogado) || null;
-};
+  return JSON.parse(usuarioLogado);
+}
 
-export const salvarUsuario = (usuarioAtualizado) => {
-  const indexDoUsuario = usuariosDoLocalStorage.findIndex((u) => u.id === usuarioAtualizado.id);
-  usuariosDoLocalStorage[indexDoUsuario] = usuarioAtualizado;
-  localStorage.setItem("usuarios", JSON.stringify(usuariosDoLocalStorage));
-};
+export function salvarUsuario(usuarioAtualizado) {
+  const usuarios =
+    JSON.parse(localStorage.getItem("usuarios")) || [];
+
+  const index = usuarios.findIndex(
+    (u) => u.id === usuarioAtualizado.id
+  );
+
+  if (index !== -1) {
+    usuarios[index] = usuarioAtualizado;
+  } else {
+    usuarios.push(usuarioAtualizado);
+  }
+
+  localStorage.setItem(
+    "usuarios",
+    JSON.stringify(usuarios)
+  );
+
+  localStorage.setItem(
+    "usuarioLogado",
+    JSON.stringify(usuarioAtualizado)
+  );
+}
+
+export function logoutUsuario() {
+  localStorage.removeItem("usuarioLogado");
+}

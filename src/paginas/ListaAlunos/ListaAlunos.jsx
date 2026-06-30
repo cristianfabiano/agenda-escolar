@@ -70,7 +70,7 @@ function ListaAlunos() {
             <MdEdit
               size={24}
               onClick={() =>
-                navigate( `/cadastro-aluno/${aluno.id}`)
+                navigate(`/cadastro-aluno/${aluno.id}`)
               }
             />
 

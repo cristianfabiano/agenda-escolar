@@ -1,9 +1,9 @@
 import { toast } from "react-toastify";
 import Avatar from "../../Componentes/Avatar/Avatar";
-import BotaoCustomizado from "../../componentes/BotaoCustomizado/BotaoCustomizado";
+import BotaoCustomizado from "../../Componentes/BotaoCustomizado/BotaoCustomizado";
 import CampoCustomizado from "../../Componentes/CampoCustomizado/CampoCustomizado";
-import Principal from "../../componentes/Principal/Principal";
-import { useAppContext } from "../../contexto/AppContext";
+import Principal from "../../Componentes/Principal/Principal";
+import { useAppContext } from "../../Contexto/AppContext"
 import { salvarUsuario } from "../../servicos/usuarios";
 import "./PerfilUsuario.css";
 

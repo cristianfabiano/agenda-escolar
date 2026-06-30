@@ -1,4 +1,4 @@
-import Principal from "../../componentes/Principal/Principal";
+import Principal from "../../Componentes/Principal/Principal";
 import "./Turmas.css";
 
 function Turmas() {

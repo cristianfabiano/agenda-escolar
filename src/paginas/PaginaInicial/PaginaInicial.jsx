@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../../Contexto/AppContext";
 
 import Principal from "../../Componentes/Principal/Principal";
 import "./PaginaInicial.css";
@@ -8,9 +9,14 @@ import { FaListUl, FaUserGraduate } from "react-icons/fa";
 
 function PaginaInicial() {
   const navigate = useNavigate();
+  const { usuarioLogado } = useAppContext();
 
   return (
-    <Principal>
+    <Principal titulo="">
+
+      <h2>Bem-vindo, {usuarioLogado?.nome}!</h2>
+      <p>{usuarioLogado?.email}</p>
+
       <div className="cards-container">
 
         <button
@@ -38,6 +44,7 @@ function PaginaInicial() {
         </button>
 
       </div>
+
     </Principal>
   );
 }

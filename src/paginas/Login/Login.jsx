@@ -3,10 +3,10 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import BotaoCustomizado from "../../componentes/BotaoCustomizado/BotaoCustomizado";
-import CampoCustomizado from "../../componentes/CampoCustomizado/CampoCustomizado";
-import Principal from "../../componentes/Principal/Principal";
-import { useAppContext } from "../../contexto/AppContext";
+import BotaoCustomizado from "../../Componentes/BotaoCustomizado/BotaoCustomizado"
+import CampoCustomizado from "../../Componentes/CampoCustomizado/CampoCustomizado";
+import Principal from "../../Componentes/Principal/Principal";
+import { useAppContext } from "../../Contexto/AppContext"
 
 function Login() {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ function Login() {
 
     toast.success("Login realizado com sucesso!");
 
-    navigate("/");
+    navigate("/inicio");
   }
 
   return (
