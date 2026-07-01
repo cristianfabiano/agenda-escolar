@@ -1,14 +1,25 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+
 import BotaoCustomizado from "../../Componentes/BotaoCustomizado/BotaoCustomizado";
 import CampoCustomizado from "../../Componentes/CampoCustomizado/CampoCustomizado";
 import Principal from "../../Componentes/Principal/Principal";
+
 import validarCPF from "../../utils/validarCPF";
+import formatarComMascara, {
+  MASCARA_CPF,
+  MASCARA_CELULAR,
+} from "../../utils/formatarComMascara";
+
+import { useAppContext } from "../../Contexto/AppContext";
 
 function CadastroAlunos() {
   const navigate = useNavigate();
-  const params = useParams();
+  const { alunoId } = useParams();
+  const { usuarioLogado } = useAppContext();
+
+  const CHAVE_ALUNOS = `alunos_${usuarioLogado.email}`;
 
   const [aluno, setAluno] = useState({
     nome: "",
@@ -20,20 +31,27 @@ function CadastroAlunos() {
     foto: "",
   });
 
+  const turmas = [
+    "Desenvolvimento Web",
+    "Desenvolvimento Mobile",
+    "Desenvolvimento de Jogos",
+    "Desenvolvimento de Sistemas",
+  ];
+
   useEffect(() => {
-    if (params.alunoId) {
-      const alunos =
-        JSON.parse(localStorage.getItem("alunos")) || [];
+    if (!alunoId) return;
 
-      const encontrado = alunos.find(
-        (item) => item.id === params.alunoId
-      );
+    const alunos =
+      JSON.parse(localStorage.getItem(CHAVE_ALUNOS)) || [];
 
-      if (encontrado) {
-        setAluno(encontrado);
-      }
+    const encontrado = alunos.find(
+      (item) => item.id === alunoId
+    );
+
+    if (encontrado) {
+      setAluno(encontrado);
     }
-  }, [params.alunoId]);
+  }, [alunoId, CHAVE_ALUNOS]);
 
   const salvar = () => {
     if (!aluno.nome.trim()) {
@@ -62,37 +80,45 @@ function CadastroAlunos() {
     }
 
     const alunos =
-      JSON.parse(localStorage.getItem("alunos")) || [];
+      JSON.parse(localStorage.getItem(CHAVE_ALUNOS)) || [];
 
     if (aluno.id) {
       const index = alunos.findIndex(
         (a) => a.id === aluno.id
       );
 
-      alunos[index] = aluno;
+      if (index !== -1) {
+        alunos[index] = aluno;
+      }
     } else {
       alunos.push({
-        id: crypto.randomUUID(),
         ...aluno,
+        id: crypto.randomUUID(),
       });
     }
 
     localStorage.setItem(
-      "alunos",
+      CHAVE_ALUNOS,
       JSON.stringify(alunos)
     );
 
-    toast.success("Aluno salvo com sucesso!");
+    toast.success(
+      aluno.id
+        ? "Aluno atualizado com sucesso!"
+        : "Aluno cadastrado com sucesso!"
+    );
+
     navigate("/lista-alunos");
   };
 
   return (
     <Principal
-      titulo="Cadastro de Alunos"
+      titulo={aluno.id ? "Editar Aluno" : "Cadastro de Alunos"}
       voltarPara="/inicio"
     >
       <CampoCustomizado
         label="Nome"
+        obrigatorio
         value={aluno.nome}
         onChange={(e) =>
           setAluno({
@@ -100,19 +126,21 @@ function CadastroAlunos() {
             nome: e.target.value,
           })
         }
-        
       />
 
       <CampoCustomizado
         label="CPF"
+        obrigatorio
         value={aluno.cpf}
         onChange={(e) =>
           setAluno({
             ...aluno,
-            cpf: e.target.value,
+            cpf: formatarComMascara(
+              e.target.value,
+              MASCARA_CPF
+            ),
           })
         }
-        
       />
 
       <CampoCustomizado
@@ -129,6 +157,7 @@ function CadastroAlunos() {
 
       <CampoCustomizado
         label="Matrícula"
+        obrigatorio
         value={aluno.matricula}
         onChange={(e) =>
           setAluno({
@@ -136,7 +165,6 @@ function CadastroAlunos() {
             matricula: e.target.value,
           })
         }
-        
       />
 
       <div style={{ marginBottom: "20px" }}>
@@ -162,21 +190,14 @@ function CadastroAlunos() {
             Selecione uma turma
           </option>
 
-          <option value="Desenvolvimento Web">
-            Desenvolvimento Web
-          </option>
-
-          <option value="Desenvolvimento Mobile">
-            Desenvolvimento Mobile
-          </option>
-
-          <option value="Desenvolvimento de Jogos">
-            Desenvolvimento de Jogos
-          </option>
-
-          <option value="Desenvolvimento de Sistemas">
-            Desenvolvimento de Sistemas
-          </option>
+          {turmas.map((turma) => (
+            <option
+              key={turma}
+              value={turma}
+            >
+              {turma}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -186,7 +207,10 @@ function CadastroAlunos() {
         onChange={(e) =>
           setAluno({
             ...aluno,
-            telefone: e.target.value,
+            telefone: formatarComMascara(
+              e.target.value,
+              MASCARA_CELULAR
+            ),
           })
         }
       />
@@ -196,39 +220,39 @@ function CadastroAlunos() {
         accept="image/*"
         label="Foto"
         onChange={(e) => {
-          const imagem = e.target.files[0];
+          const imagem = e.target.files?.[0];
 
-          if (imagem) {
-            const reader = new FileReader();
+          if (!imagem) return;
 
-            reader.onload = (event) => {
-              setAluno({
-                ...aluno,
-                foto: event.target.result,
-              });
-            };
+          const reader = new FileReader();
 
-            reader.readAsDataURL(imagem);
-          }
+          reader.onload = ({ target }) => {
+            setAluno((prev) => ({
+              ...prev,
+              foto: target.result,
+            }));
+          };
+
+          reader.readAsDataURL(imagem);
         }}
       />
 
       {aluno.foto && (
         <div
           style={{
-            marginTop: "10px",
+            marginTop: "20px",
             display: "flex",
             justifyContent: "center",
           }}
         >
           <img
             src={aluno.foto}
-            alt="Foto do Aluno"
+            alt="Foto do aluno"
             style={{
               width: "150px",
               height: "150px",
+              borderRadius: "10px",
               objectFit: "cover",
-              borderRadius: "8px",
             }}
           />
         </div>
@@ -238,7 +262,7 @@ function CadastroAlunos() {
         tipo="primario"
         aoClicar={salvar}
       >
-        Salvar
+        {aluno.id ? "Atualizar" : "Salvar"}
       </BotaoCustomizado>
     </Principal>
   );

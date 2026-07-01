@@ -1,35 +1,25 @@
-.avatar {
+.avatar__root {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #ddd;
+
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 15px;
+
+  overflow: hidden;
+
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .avatar__imagem {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.avatar__root {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: var(--cor-cinza);
-
-  display: grid;
-  place-content: center;
-
-  color: var(--cor-texto-claro);
-  font-weight: bold;
-  font-size: 0.9rem;
-  overflow: hidden;
-  user-select: none;
-}
-
-.avatar__root img {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
   object-fit: cover;
+}
+
+.avatar__root span {
+  color: #555;
 }

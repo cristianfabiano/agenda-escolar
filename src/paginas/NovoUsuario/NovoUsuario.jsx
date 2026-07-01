@@ -9,6 +9,8 @@ import Principal from "../../Componentes/Principal/Principal";
 import validarEmail from "../../utils/validarEmail";
 import validarSenha from "../../utils/validarSenha";
 
+const CHAVE_USUARIOS = "usuarios";
+
 function NovoUsuario() {
   const navigate = useNavigate();
 
@@ -20,38 +22,40 @@ function NovoUsuario() {
   });
 
   function salvar() {
+    const { nome, email, senha, confirmacaoSenha } = usuarioForm;
+
     if (
-      !usuarioForm.nome.trim() ||
-      !usuarioForm.email.trim() ||
-      !usuarioForm.senha.trim() ||
-      !usuarioForm.confirmacaoSenha.trim()
+      !nome.trim() ||
+      !email.trim() ||
+      !senha.trim() ||
+      !confirmacaoSenha.trim()
     ) {
       toast.error("Preencha todos os campos.");
       return;
     }
 
-    if (!validarEmail(usuarioForm.email)) {
+    if (!validarEmail(email)) {
       toast.error("Email inválido.");
       return;
     }
 
-    if (!validarSenha(usuarioForm.senha)) {
+    if (!validarSenha(senha)) {
       toast.error("Senha inválida.");
       return;
     }
 
-    if (usuarioForm.senha !== usuarioForm.confirmacaoSenha) {
+    if (senha !== confirmacaoSenha) {
       toast.error("As senhas não conferem.");
       return;
     }
 
     const usuarios =
-      JSON.parse(localStorage.getItem("usuarios")) || [];
+      JSON.parse(localStorage.getItem(CHAVE_USUARIOS)) || [];
 
-    const existe = usuarios.find(
+    const existe = usuarios.some(
       (usuario) =>
         usuario.email.toLowerCase() ===
-        usuarioForm.email.toLowerCase()
+        email.toLowerCase()
     );
 
     if (existe) {
@@ -61,33 +65,35 @@ function NovoUsuario() {
 
     usuarios.push({
       id: crypto.randomUUID(),
-      nome: usuarioForm.nome,
-      email: usuarioForm.email.toLowerCase(),
-      senha: usuarioForm.senha,
+      nome: nome.trim(),
+      email: email.toLowerCase().trim(),
+      senha,
       foto: "",
     });
 
     localStorage.setItem(
-      "usuarios",
+      CHAVE_USUARIOS,
       JSON.stringify(usuarios)
     );
 
     toast.success("Usuário cadastrado com sucesso!");
 
-    navigate("/login");
+    navigate("/login", { replace: true });
   }
 
   return (
-    <Principal titulo="Novo Usuário" voltarPara="/login">
-
+    <Principal
+      titulo="Novo Usuário"
+      voltarPara="/login"
+    >
       <CampoCustomizado
         label="Nome"
-        value={usuarioForm.nome}
         obrigatorio
-        onChange={(e)=>
+        value={usuarioForm.nome}
+        onChange={(e) =>
           setUsuarioForm({
             ...usuarioForm,
-            nome:e.target.value
+            nome: e.target.value,
           })
         }
       />
@@ -95,12 +101,12 @@ function NovoUsuario() {
       <CampoCustomizado
         label="Email"
         type="email"
-        value={usuarioForm.email}
         obrigatorio
-        onChange={(e)=>
+        value={usuarioForm.email}
+        onChange={(e) =>
           setUsuarioForm({
             ...usuarioForm,
-            email:e.target.value
+            email: e.target.value,
           })
         }
       />
@@ -108,12 +114,12 @@ function NovoUsuario() {
       <CampoCustomizado
         label="Senha"
         type="password"
-        value={usuarioForm.senha}
         obrigatorio
-        onChange={(e)=>
+        value={usuarioForm.senha}
+        onChange={(e) =>
           setUsuarioForm({
             ...usuarioForm,
-            senha:e.target.value
+            senha: e.target.value,
           })
         }
       />
@@ -121,20 +127,22 @@ function NovoUsuario() {
       <CampoCustomizado
         label="Confirmar Senha"
         type="password"
-        value={usuarioForm.confirmacaoSenha}
         obrigatorio
-        onChange={(e)=>
+        value={usuarioForm.confirmacaoSenha}
+        onChange={(e) =>
           setUsuarioForm({
             ...usuarioForm,
-            confirmacaoSenha:e.target.value
+            confirmacaoSenha: e.target.value,
           })
         }
       />
 
-      <BotaoCustomizado tipo="primario" aoClicar={salvar}>
+      <BotaoCustomizado
+        tipo="primario"
+        aoClicar={salvar}
+      >
         Salvar
       </BotaoCustomizado>
-
     </Principal>
   );
 }

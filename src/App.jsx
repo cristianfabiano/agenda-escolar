@@ -9,11 +9,10 @@ import NovoUsuario from "./paginas/NovoUsuario/NovoUsuario";
 import PaginaInicial from "./paginas/PaginaInicial/PaginaInicial";
 import CadastroAlunos from "./paginas/CadastroAlunos/CadastroAlunos";
 import ListaAlunos from "./paginas/ListaAlunos/ListaAlunos";
-import Turmas from "./paginas/Turmas/Turmas";
 import PerfilUsuario from "./paginas/PerfilUsuario/PerfilUsuario";
+import Turmas from "./paginas/Turmas/Turmas";
 
 const router = createBrowserRouter([
-
   {
     path: "/",
     element: <Login />,
@@ -26,8 +25,6 @@ const router = createBrowserRouter([
     path: "/novo-usuario",
     element: <NovoUsuario />,
   },
-
-
   {
     element: <ValidarAutenticacao />,
     children: [
@@ -52,6 +49,19 @@ const router = createBrowserRouter([
         element: <Turmas />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: (
+      <h1
+        style={{
+          textAlign: "center",
+          marginTop: "80px",
+        }}
+      >
+        Página não encontrada.
+      </h1>
+    ),
   },
 ]);
 

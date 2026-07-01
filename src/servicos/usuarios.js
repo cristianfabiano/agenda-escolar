@@ -1,38 +1,50 @@
-export function buscarUsuarioLogado() {
-  const usuarioLogado = localStorage.getItem("usuarioLogado");
+const CHAVE_USUARIOS = "usuarios";
+const CHAVE_USUARIO_LOGADO = "usuarioLogado";
 
-  if (!usuarioLogado) {
+export function buscarUsuarioLogado() {
+  try {
+    const usuarioLogado = localStorage.getItem(
+      CHAVE_USUARIO_LOGADO
+    );
+
+    return usuarioLogado
+      ? JSON.parse(usuarioLogado)
+      : null;
+  } catch (error) {
+    console.error("Erro ao buscar usuário logado:", error);
     return null;
   }
-
-  return JSON.parse(usuarioLogado);
 }
 
 export function salvarUsuario(usuarioAtualizado) {
-  const usuarios =
-    JSON.parse(localStorage.getItem("usuarios")) || [];
+  try {
+    const usuarios =
+      JSON.parse(localStorage.getItem(CHAVE_USUARIOS)) || [];
 
-  const index = usuarios.findIndex(
-    (u) => u.id === usuarioAtualizado.id
-  );
+    const index = usuarios.findIndex(
+      (usuario) => usuario.id === usuarioAtualizado.id
+    );
 
-  if (index !== -1) {
-    usuarios[index] = usuarioAtualizado;
-  } else {
-    usuarios.push(usuarioAtualizado);
+    if (index >= 0) {
+      usuarios[index] = usuarioAtualizado;
+    } else {
+      usuarios.push(usuarioAtualizado);
+    }
+
+    localStorage.setItem(
+      CHAVE_USUARIOS,
+      JSON.stringify(usuarios)
+    );
+
+    localStorage.setItem(
+      CHAVE_USUARIO_LOGADO,
+      JSON.stringify(usuarioAtualizado)
+    );
+  } catch (error) {
+    console.error("Erro ao salvar usuário:", error);
   }
-
-  localStorage.setItem(
-    "usuarios",
-    JSON.stringify(usuarios)
-  );
-
-  localStorage.setItem(
-    "usuarioLogado",
-    JSON.stringify(usuarioAtualizado)
-  );
 }
 
 export function logoutUsuario() {
-  localStorage.removeItem("usuarioLogado");
+  localStorage.removeItem(CHAVE_USUARIO_LOGADO);
 }

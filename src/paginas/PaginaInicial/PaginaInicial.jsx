@@ -1,11 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../../Contexto/AppContext";
-import BotaoCustomizado from "../../Componentes/BotaoCustomizado/BotaoCustomizado";
-import Principal from "../../Componentes/Principal/Principal";
 import "./PaginaInicial.css";
 
-import { IoPersonAdd } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 import { FaListUl, FaUserGraduate } from "react-icons/fa";
+import { IoPersonAdd } from "react-icons/io5";
+
+import BotaoCustomizado from "../../Componentes/BotaoCustomizado/BotaoCustomizado";
+import Principal from "../../Componentes/Principal/Principal";
+import { useAppContext } from "../../Contexto/AppContext";
 
 function PaginaInicial() {
   const navigate = useNavigate();
@@ -14,24 +15,32 @@ function PaginaInicial() {
   function sair() {
     localStorage.removeItem("usuarioLogado");
     setUsuarioLogado(null);
+
     navigate("/login", { replace: true });
   }
 
-  return (
-    <Principal titulo="">
+  function irPara(rota) {
+    navigate(rota);
+  }
 
+  return (
+    <Principal titulo="Página Inicial">
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           marginBottom: "30px",
+          gap: "20px",
+          flexWrap: "wrap",
         }}
       >
         <div>
           <p>{usuarioLogado?.email}</p>
-          <h2>Olá {usuarioLogado?.nome}, sejá bem-vindo!</h2>
-          
+
+          <h2>
+            Olá, {usuarioLogado?.nome}! Seja bem-vindo!
+          </h2>
         </div>
 
         <BotaoCustomizado
@@ -43,10 +52,9 @@ function PaginaInicial() {
       </div>
 
       <div className="cards-container">
-
         <button
           className="card"
-          onClick={() => navigate("/cadastro-aluno")}
+          onClick={() => irPara("/cadastro-aluno")}
         >
           <IoPersonAdd size={60} />
           <span>Cadastro de Alunos</span>
@@ -54,7 +62,7 @@ function PaginaInicial() {
 
         <button
           className="card"
-          onClick={() => navigate("/lista-alunos")}
+          onClick={() => irPara("/lista-alunos")}
         >
           <FaUserGraduate size={60} />
           <span>Lista de Alunos</span>
@@ -62,14 +70,12 @@ function PaginaInicial() {
 
         <button
           className="card"
-          onClick={() => navigate("/lista-turmas")}
+          onClick={() => irPara("/lista-turmas")}
         >
           <FaListUl size={60} />
           <span>Turmas</span>
         </button>
-
       </div>
-
     </Principal>
   );
 }
