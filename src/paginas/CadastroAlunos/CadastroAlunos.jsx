@@ -100,7 +100,7 @@ function CadastroAlunos() {
             nome: e.target.value,
           })
         }
-        obrigatorio
+        
       />
 
       <CampoCustomizado
@@ -112,7 +112,7 @@ function CadastroAlunos() {
             cpf: e.target.value,
           })
         }
-        obrigatorio
+        
       />
 
       <CampoCustomizado
@@ -136,7 +136,7 @@ function CadastroAlunos() {
             matricula: e.target.value,
           })
         }
-        obrigatorio
+        
       />
 
       <div style={{ marginBottom: "20px" }}>

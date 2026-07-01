@@ -29,12 +29,13 @@ function PaginaInicial() {
         }}
       >
         <div>
-          <h2>Bem-vindo, {usuarioLogado?.nome}!</h2>
           <p>{usuarioLogado?.email}</p>
+          <h2>Olá {usuarioLogado?.nome}, sejá bem-vindo!</h2>
+          
         </div>
 
         <BotaoCustomizado
-          tipo="secundario"
+          tipo="primario"
           aoClicar={sair}
         >
           Sair
